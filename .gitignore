@@ -1,0 +1,15 @@
+# 再生成で戻るもの（バックアップ不要）
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+
+# 機密・git に入れないもの（←これらを持ち始めたら backup.py の REPOS に登録すること）
+.env
+*.pem
+
+# 生成物・データ（大きくなるならここで除外し、backup.py の REPOS 登録で退避）
+# output/
+# data/
