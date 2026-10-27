@@ -1,12 +1,19 @@
-# rule-sheets — ルール早見表サイト
+# rule-sheets — ボードゲーム ルール早見表
 
-## 何を作るものか
+ボードゲームのルール説明動画（YouTube）の概要欄から開く、早見表のサイトです。
+動画で省いた枚数・表・細かい決まりと、間違えやすいところを、ゲームごとに 1 ページにまとめています。
 
-（何を作るものか・仕組み・使い方の入口を書く。**進捗・現況は書かない** → STATUS.md の仕事）
+公開先: https://i-see-know.github.io/rule-sheets/
 
 ## 仕組み（要点）
 
-- （構成・データの流れ。決まっていなければ後で埋める）
+- `data\<slug>.json` … ゲームごとの中身（章・項目・根拠のページ）。インスト動画の各ジョブ（inst-video の `jobs\<job>\make_sheet.py`）が書き出す。
+- `build.py` … `data\` から `docs\<slug>\index.html` と一覧 `docs\index.html` を組む（見た目はここだけが持つ）。
+- `docs\` … GitHub Pages の公開物（main ブランチの `/docs`）。手で直さない。
+
+```
+python build.py
+```
 
 ## 文書マップ
 
@@ -14,5 +21,3 @@
 |---|---|
 | [STATUS.md](STATUS.md) | 現況・残タスク（正典） |
 | [CLAUDE.md](CLAUDE.md) | AI 作業時の必須注意 |
-
-<!-- 設計書・引き継ぎ等の詳細文書を作ったら、この表に1行足して束ねる -->
