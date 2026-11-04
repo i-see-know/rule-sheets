@@ -94,11 +94,14 @@ def game_page(g: dict) -> str:
                 parts.append('<ul class="tbl">' + "".join(f"<li>{html.escape(x)}</li>" for x in it["table"]) + "</ul>")
             else:
                 cur.append(f'<li><span class="t">{html.escape(it["text"])}</span><span class="src">{cite(it.get("src", []))}</span></li>')
-        if cur:
-            parts.append('<ol class="items">' + "".join(cur) + "</ol>")
+        if cur:   # 章の "start" で番号の数え始めを変える（フェイズの番号に合わせる・無い章は 1 から）
+            st = f' start="{int(sec["start"])}"' if sec.get("start") else ""
+            parts.append(f'<ol class="items"{st}>' + "".join(cur) + "</ol>")
         secs.append(f'<section id="s{i}"><h2>{html.escape(sec["h"])}</h2>{"".join(parts)}</section>')
     nav = "".join(f'<a href="#s{i}">{html.escape(s["h"])}</a>' for i, s in enumerate(g["sections"]))
     video = f'・<a href="{html.escape(g["video_url"])}" target="_blank" rel="noopener">ルール説明動画</a>' if g.get("video_url") else ""
+    if g.get("pdf"):   # 配る用の PDF（data\ に置いた物を docs\<slug>\ へ写す・無いゲームは今までどおり）
+        video += f'・<a href="{html.escape(g["pdf"]["file"])}">{html.escape(g["pdf"].get("label", "PDF"))}</a>'
     body = f"""  <p class="back"><a href="../">{SITE_TITLE}</a>{video}</p>
   <header style="display:grid;gap:10px">
     <h1>{html.escape(g["title"])} 早見表<small>{html.escape(g.get("kicker", "ルール説明動画の補足"))}</small></h1>
@@ -129,6 +132,8 @@ def main():
     for g in games:
         d = DOCS / g["slug"]; d.mkdir(exist_ok=True)
         (d / "index.html").write_text(game_page(g), encoding="utf-8")
+        if g.get("pdf"):
+            (d / g["pdf"]["file"]).write_bytes((DATA / g["pdf"]["file"]).read_bytes())
     (DOCS / "index.html").write_text(index_page(games), encoding="utf-8")
     print(f"{len(games)} 件 → {DOCS}")
 
