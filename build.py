@@ -99,7 +99,7 @@ def game_page(g: dict) -> str:
             parts.append(f'<ol class="items"{st}>' + "".join(cur) + "</ol>")
         secs.append(f'<section id="s{i}"><h2>{html.escape(sec["h"])}</h2>{"".join(parts)}</section>')
     nav = "".join(f'<a href="#s{i}">{html.escape(s["h"])}</a>' for i, s in enumerate(g["sections"]))
-    video = f'・<a href="{html.escape(g["video_url"])}" target="_blank" rel="noopener">ルール説明動画</a>' if g.get("video_url") else ""
+    video = f'・<a href="{html.escape(g["video_url"])}" target="_blank" rel="noopener">ルール解説動画</a>' if g.get("video_url") else ""
     if g.get("pdf"):   # 配る用の PDF（data\ に置いた物を docs\<slug>\ へ写す・無いゲームは今までどおり）
         video += f'・<a href="{html.escape(g["pdf"]["file"])}">{html.escape(g["pdf"].get("label", "PDF"))}</a>'
     body = f"""  <p class="back"><a href="../">{SITE_TITLE}</a>{video}</p>

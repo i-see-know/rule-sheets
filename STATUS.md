@@ -2,7 +2,7 @@
 title: ルール早見表サイト
 phase: 開発中
 health: green
-updated: 2026-10-27
+updated: 2026-11-12
 detail: インスト動画の概要欄から開く早見表を GitHub Pages で公開
 public: true
 ---
@@ -19,4 +19,4 @@ public: true
 
 ## 次のアクション
 
-- [ ] リコールの動画を公開したら data の `video_url` を足す
+- [x] リコールの動画のリンクを足した（2026-11-12・data は inst-video の jobs/recall/make_sheet.py から）
