@@ -104,7 +104,7 @@ def game_page(g: dict) -> str:
         video += f'・<a href="{html.escape(g["pdf"]["file"])}">{html.escape(g["pdf"].get("label", "PDF"))}</a>'
     body = f"""  <p class="back"><a href="../">{SITE_TITLE}</a>{video}</p>
   <header style="display:grid;gap:10px">
-    <h1>{html.escape(g["title"])} 早見表<small>{html.escape(g.get("kicker", "ルール説明動画の補足"))}</small></h1>
+    <h1>{html.escape(g["title"])} 早見表<small>{html.escape(g.get("kicker", "ルール解説動画の補足"))}</small></h1>
     <p class="lead">{html.escape(g["lead"])}</p>
     <nav aria-label="目次">{nav}</nav>
   </header>
@@ -117,11 +117,11 @@ def index_page(games: list[dict]) -> str:
     items = "".join(f'<li><a href="{html.escape(g["slug"])}/"><b>{html.escape(g["title"])}</b>'
                     f'<span>{html.escape(g.get("title_en", ""))}</span></a></li>' for g in games)
     body = f"""  <header style="display:grid;gap:10px">
-    <h1>{SITE_TITLE}<small>ルール説明動画の補足</small></h1>
-    <p class="lead">ルール説明動画で省いた枚数・表・細かい決まりと、間違えやすいところをまとめています。動画の制作者が AI の手を借りてまとめた非公式の資料です。迷ったら各ゲームのルールブックを見てください。</p>
+    <h1>{SITE_TITLE}<small>ルール解説動画の補足</small></h1>
+    <p class="lead">ルール解説動画で省いた枚数・表・細かい決まりと、間違えやすいところをまとめています。動画の制作者が AI の手を借りてまとめた非公式の資料です。迷ったら各ゲームのルールブックを見てください。</p>
   </header>
   <ul class="games">{items}</ul>"""
-    return doc(SITE_TITLE, body, "ボードゲームのルール説明動画の補足の早見表")
+    return doc(SITE_TITLE, body, "ボードゲームのルール解説動画の補足の早見表")
 
 
 def main():
